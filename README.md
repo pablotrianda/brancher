@@ -1,4 +1,5 @@
 # BRANCHER!!.
+## Tool to view and select the git branches
    <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
    
 # Usage
