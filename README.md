@@ -6,9 +6,15 @@
    <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
    
 # Usage
-* Run `brancher`
+* Download and Run `brancher`
 * Select the brach to make the checkout
 
 # Example
 ![Bancher](https://media.giphy.com/media/Fc91P7kW8azhxREs7A/giphy.gif)
+
+# Run on development mode
+* Clone this repo `git clone https://github.com/pablotrianda/brancher.git`
+* Go to folder `cd brancher`
+* Install the dependencies `go mod tidy`
+* Run `go run *.go`
 
