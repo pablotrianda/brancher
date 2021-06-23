@@ -1,4 +1,4 @@
-# Tool to switch on differents git branches.
+# BRANCHER!!.
    <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
    
 # Usage
