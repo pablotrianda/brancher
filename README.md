@@ -1,10 +1,11 @@
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 ![status](https://github.com/pablotrianda/brancher/actions/workflows/go.yml/badge.svg)
 
-# BRANCHER!!.
+# BRANCHER 🔍🌿!!.
 ## Tool to view and select the git branches
+<p align="center">
    <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
-   
+</p>
 # Usage
 * Download and Run `brancher`
 * Select the brach to make the checkout
