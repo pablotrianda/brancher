@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os/exec"
@@ -12,7 +13,28 @@ import (
 const GitCommand = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
 
 func main() {
+	hasArgument, branchName := hasArgument()
+	if hasArgument {
+		createANewBrach(branchName)
+	} else {
+		changeBranch()
+	}
 
+}
+
+func createANewBrach(branchName string) {
+	fmt.Printf("Createad a new branch called %q\n", branchName)
+	confirm := false
+	prompt := &survey.Confirm{
+		Message: "Do you create a new branch?",
+	}
+	survey.AskOne(prompt, &confirm)
+	if confirm {
+		runCommand("git checkout -b " + branchName)
+	}
+}
+
+func changeBranch() {
 	commandOutput := runCommand(GitCommand)
 
 	if len(commandOutput) == 0 {
@@ -24,7 +46,6 @@ func main() {
 	selectedBranch := getSelectedBranch(branches)
 
 	runCommand("git checkout " + selectedBranch)
-
 }
 
 func runCommand(command string) string {
@@ -69,4 +90,19 @@ func getSelectedBranch(branches []string) string {
 	}
 
 	return answers.Branch
+}
+
+func hasArgument() (bool, string) {
+	hasArgument := false
+	nameNewBranch := ""
+
+	newBranchArg := flag.String("n", "", "Name of a new branch")
+	flag.Parse()
+
+	if *newBranchArg != "" {
+		hasArgument = true
+		nameNewBranch = *newBranchArg
+	}
+
+	return hasArgument, nameNewBranch
 }

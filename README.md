@@ -10,9 +10,11 @@
 # Usage
 * Download and Run `brancher`
 * Select the brach to make the checkout
+* Use the command `-c` to create a new branch
 
 # Example
 ![Bancher](https://media.giphy.com/media/Fc91P7kW8azhxREs7A/giphy.gif)
+
 
 # Run on development mode
 * Clone this repo `git clone https://github.com/pablotrianda/brancher.git`
