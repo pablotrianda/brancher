@@ -10,7 +10,7 @@
 # Usage
 * Download and Run `brancher`
 * Select the brach to make the checkout
-* Use the command `-c` to create a new branch
+* Use the command `-n` to create a new branch
 
 # Example
 ![Bancher](https://media0.giphy.com/media/d6zP9HA60tiG788xkX/giphy.gif?cid=790b7611cf30827b13c0d1d134eb43844f90b94637fa065a&rid=giphy.gif&ct=g)
