@@ -4,13 +4,14 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 )
 
-const GitCommand = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
+const GITCOMMAND = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
 
 func main() {
 	hasArgument, branchName := hasArgument()
@@ -35,15 +36,22 @@ func createANewBrach(branchName string) {
 }
 
 func changeBranch() {
-	commandOutput := runCommand(GitCommand)
+	commandOutput := runCommand(GITCOMMAND)
 
 	if len(commandOutput) == 0 {
 		fmt.Println("BRANCHER -- The current repo hasn't git branches.")
 		return
 	}
 
-	branches := getBranches(commandOutput)
-	selectedBranch := getSelectedBranch(branches)
+	var selectedBranch string
+
+	known_branch := os.Args[1:]
+	if len(known_branch) != 0 {
+		selectedBranch = known_branch[0]
+	} else {
+		branches := getBranches(commandOutput)
+		selectedBranch = getSelectedBranch(branches)
+	}
 
 	runCommand("git checkout " + selectedBranch)
 }
