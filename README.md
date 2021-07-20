@@ -9,7 +9,7 @@
 
 # Usage
 * Download and Run `brancher`
-* Select the brach to make the checkout
+* Select the brach to make the checkout or you can run `brancher branch_name` and change the branch
 * Use the command `-n` to create a new branch
 
 # Example
