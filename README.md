@@ -8,8 +8,8 @@
 </p>
 
 # Usage
-* Download and Run `$ brancher`
-* Select the brach to make the checkout or you can run `$ brancher branch_name` and change the branch
+* Download the binary from releases section. 
+* Run `$ brancher` and select the brach to make the checkout in the menu or you can run `$ brancher branch_name` directly
 * Use the command `-n` to create a new branch
 
 # Example
