@@ -22,3 +22,6 @@
 * Install the dependencies `go mod tidy`
 * Run `go run *.go`
 
+# Extra - Build using golang on Docker
+* Run `make build`
+
