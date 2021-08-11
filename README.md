@@ -26,5 +26,6 @@
 * Run `make build`
 
 # Next steps
+- [ ] Show error in a friendly way.  
 - [ ] Build a neovim plugin ;) 
 
