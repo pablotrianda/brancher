@@ -2,7 +2,7 @@
 ![status](https://github.com/pablotrianda/brancher/actions/workflows/go.yml/badge.svg)
 
 # BRANCHER 🔍🌿!!.
-## Tool to view and select the git branches
+## Tool to manage git branches
 <p align="center">
    <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
 </p>
