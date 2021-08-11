@@ -25,3 +25,6 @@
 # Extra - Build using golang with Docker
 * Run `make build`
 
+# Next steps
+- [ ] Build a neovim plugin ;) 
+
