@@ -2,7 +2,7 @@
 ![status](https://github.com/pablotrianda/brancher/actions/workflows/go.yml/badge.svg)
 
 # BRANCHER 🔍🌿!!.
-## Tool to view and select the git branches
+## Tool to manage git branches
 <p align="center">
    <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
 </p>
@@ -22,6 +22,10 @@
 * Install the dependencies `go mod tidy`
 * Run `go run *.go`
 
-# Extra - Build using golang on Docker
+# Extra - Build using golang with Docker
 * Run `make build`
+
+# Next steps
+- [ ] Show error in a friendly way.  
+- [ ] Build a neovim plugin ;) 
 
