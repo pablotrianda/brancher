@@ -27,5 +27,6 @@
 
 # Next steps
 - [ ] Show error in a friendly way.  
+- [ ] Create a fix conflicted automated steps. [THIS](https://dev.to/smetankajakub/how-to-resolve-merge-conflicts-in-bitbucket-repository-with-git-bash-34ag)
 - [ ] Build a neovim plugin ;) 
 
