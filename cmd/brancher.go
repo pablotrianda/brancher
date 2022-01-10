@@ -1,18 +1,12 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/fatih/color"
 )
-
-const GITCOMMAND = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
-const ERROR_CREATE = "Error when tried to create a new branch"
-const ERROR_CHANGE = "Error when tried to change to another branch"
 
 func Brancher(hasArgument bool, branchName string) {
 	if hasArgument {
@@ -23,7 +17,7 @@ func Brancher(hasArgument bool, branchName string) {
 }
 
 func createANewBrach(branchName string) {
-	fmt.Printf("Createad a new branch called %q\n", branchName)
+	showAlert("Createad a new branch called "+branchName, 2)
 	confirm := false
 	prompt := &survey.Confirm{
 		Message: "Do you create a new branch?",
@@ -38,7 +32,7 @@ func changeBranch() {
 	commandOutput := runCommand(GITCOMMAND, ERROR_CHANGE)
 
 	if len(commandOutput) == 0 {
-		fmt.Println("BRANCHER -- The current repo hasn't git branches.")
+		showAlert(ERROR_NOT_BRANCHES, FAIL_ALERT)
 		return
 	}
 
@@ -58,7 +52,7 @@ func changeBranch() {
 func runCommand(command string, errorMessage string) string {
 	commandOutput, err := exec.Command("bash", "-c", command).CombinedOutput()
 	if err != nil {
-		color.Red("BRANCHER: " + errorMessage)
+		showAlert("BRANCHER: "+errorMessage, FAIL_ALERT)
 		return ""
 	}
 	return string(commandOutput)
@@ -92,7 +86,7 @@ func getSelectedBranch(branches []string) string {
 
 	err := survey.Ask(qs, &answers)
 	if err != nil {
-		fmt.Println(err.Error())
+		showAlert(err.Error(), FAIL_ALERT)
 		return ""
 	}
 
