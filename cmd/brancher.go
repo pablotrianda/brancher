@@ -2,15 +2,17 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/fatih/color"
 )
 
 const GITCOMMAND = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
+const ERROR_CREATE = "Error when tried to create a new branch"
+const ERROR_CHANGE = "Error when tried to change to another branch"
 
 func Brancher(hasArgument bool, branchName string) {
 	if hasArgument {
@@ -18,7 +20,6 @@ func Brancher(hasArgument bool, branchName string) {
 	} else {
 		changeBranch()
 	}
-
 }
 
 func createANewBrach(branchName string) {
@@ -29,12 +30,12 @@ func createANewBrach(branchName string) {
 	}
 	survey.AskOne(prompt, &confirm)
 	if confirm {
-		runCommand("git checkout -b " + branchName)
+		runCommand("git checkout -b "+branchName, ERROR_CREATE)
 	}
 }
 
 func changeBranch() {
-	commandOutput := runCommand(GITCOMMAND)
+	commandOutput := runCommand(GITCOMMAND, ERROR_CHANGE)
 
 	if len(commandOutput) == 0 {
 		fmt.Println("BRANCHER -- The current repo hasn't git branches.")
@@ -51,13 +52,13 @@ func changeBranch() {
 		selectedBranch = getSelectedBranch(branches)
 	}
 
-	runCommand("git checkout " + selectedBranch)
+	runCommand("git checkout "+selectedBranch, ERROR_CHANGE)
 }
 
-func runCommand(command string) string {
-	commandOutput, err := exec.Command("bash", "-c", command).Output()
+func runCommand(command string, errorMessage string) string {
+	commandOutput, err := exec.Command("bash", "-c", command).CombinedOutput()
 	if err != nil {
-		log.Fatal(err)
+		color.Red("BRANCHER: " + errorMessage)
 		return ""
 	}
 	return string(commandOutput)
