@@ -21,11 +21,10 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 		}
 	}
 
-	saveActualBranch()
-
 	if backToPreviousBranch {
 		toPreviousBranch()
 	} else {
+		saveActualBranch()
 		if hasArgument {
 			createANewBrach(branchName)
 		} else {
