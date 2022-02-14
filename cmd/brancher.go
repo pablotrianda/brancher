@@ -3,17 +3,46 @@ package cmd
 import (
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 )
 
-func Brancher(hasArgument bool, branchName string) {
-	if hasArgument {
-		createANewBrach(branchName)
-	} else {
-		changeBranch()
+func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
+	if _, err := findConfiguration(CONFIG_DIR); err != nil {
+		if conf := confirmCreateConfig(); !conf {
+			showAlert(ERROR_CONFIG, FAIL_ALERT)
+			return
+		}
+		if err := createNewConfig(); err != nil {
+			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
+			return
+		}
 	}
+
+	saveActualBranch()
+
+	if backToPreviousBranch {
+		toPreviousBranch()
+	} else {
+		if hasArgument {
+			createANewBrach(branchName)
+		} else {
+			changeBranch()
+		}
+	}
+
+}
+
+func confirmCreateConfig() bool {
+	confirm := false
+	prompt := &survey.Confirm{
+		Message: "Do you a file config on $HOME/.config/brancher?",
+	}
+	survey.AskOne(prompt, &confirm)
+
+	return confirm
 }
 
 func createANewBrach(branchName string) {
@@ -49,6 +78,15 @@ func changeBranch() {
 	runCommand("git checkout "+selectedBranch, ERROR_CHANGE)
 }
 
+func saveActualBranch() {
+	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
+	repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
+	err := SaveBranch(actualName, getRepoName(), repoDir)
+	if err != nil {
+		showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
+	}
+}
+
 func runCommand(command string, errorMessage string) string {
 	commandOutput, err := exec.Command("bash", "-c", command).CombinedOutput()
 	if err != nil {
@@ -56,6 +94,11 @@ func runCommand(command string, errorMessage string) string {
 		return ""
 	}
 	return string(commandOutput)
+}
+
+func getRepoName() string {
+	dir, _ := os.Getwd()
+	return filepath.Base(dir)
 }
 
 func getBranches(commandOutput string) []string {
@@ -91,4 +134,13 @@ func getSelectedBranch(branches []string) string {
 	}
 
 	return answers.Branch
+}
+
+func toPreviousBranch() {
+	prevBranch, err := GetPreviousBranchName(getRepoName())
+	if err != nil {
+		showAlert(ERROR_NOT_BRANCHES, FAIL_ALERT)
+		return
+	}
+	runCommand("git checkout "+prevBranch, ERROR_CHANGE)
 }
