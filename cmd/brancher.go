@@ -23,6 +23,7 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 
 	if backToPreviousBranch {
 		toPreviousBranch()
+		saveActualBranch()
 	} else {
 		saveActualBranch()
 		if hasArgument {
