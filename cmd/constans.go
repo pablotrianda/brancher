@@ -3,6 +3,7 @@ package cmd
 // Commands
 const GITCOMMAND = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
 const GIT_GET_NAME = "git rev-parse --abbrev-ref HEAD"
+const GIT_GET_DIR = "git rev-parse --show-toplevel"
 
 // Erros messages
 const ERROR_CREATE = "Error when tried to create a new branch"

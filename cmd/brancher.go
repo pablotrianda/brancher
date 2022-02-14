@@ -9,7 +9,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-func Brancher(hasArgument bool, branchName string) {
+func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 	if _, err := findConfiguration(CONFIG_DIR); err != nil {
 		if conf := confirmCreateConfig(); !conf {
 			showAlert(ERROR_CONFIG, FAIL_ALERT)
@@ -23,11 +23,16 @@ func Brancher(hasArgument bool, branchName string) {
 
 	saveActualBranch()
 
-	if hasArgument {
-		createANewBrach(branchName)
+	if backToPreviousBranch {
+		toPreviousBranch()
 	} else {
-		changeBranch()
+		if hasArgument {
+			createANewBrach(branchName)
+		} else {
+			changeBranch()
+		}
 	}
+
 }
 
 func confirmCreateConfig() bool {
@@ -75,7 +80,8 @@ func changeBranch() {
 
 func saveActualBranch() {
 	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
-	err := SaveBranch(actualName, getRepoName())
+	repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
+	err := SaveBranch(actualName, getRepoName(), repoDir)
 	if err != nil {
 		showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
 	}
@@ -128,4 +134,13 @@ func getSelectedBranch(branches []string) string {
 	}
 
 	return answers.Branch
+}
+
+func toPreviousBranch() {
+	prevBranch, err := GetPreviousBranchName(getRepoName())
+	if err != nil {
+		showAlert(ERROR_NOT_BRANCHES, FAIL_ALERT)
+		return
+	}
+	runCommand("git checkout "+prevBranch, ERROR_CHANGE)
 }
