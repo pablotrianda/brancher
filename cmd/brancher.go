@@ -79,12 +79,12 @@ func changeBranch() {
 }
 
 func saveActualBranch() {
-	//actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
-	//repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
-	//err := SaveBranch(actualName, getRepoName(), repoDir)
-	//if err != nil {
-	//showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
-	//}
+	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
+	repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
+	err := SaveBranch(actualName, getRepoName(), repoDir)
+	if err != nil {
+		showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
+	}
 }
 
 func runCommand(command string, errorMessage string) string {
@@ -137,10 +137,10 @@ func getSelectedBranch(branches []string) string {
 }
 
 func toPreviousBranch() {
-	//prevBranch, err := GetPreviousBranchName(getRepoName())
-	//if err != nil {
-	//showAlert(ERROR_NOT_BRANCHES, FAIL_ALERT)
-	//return
-	//}
-	//runCommand("git checkout "+prevBranch, ERROR_CHANGE)
+	prevBranch, err := GetPreviousBranchName(getRepoName())
+	if err != nil {
+		showAlert(ERROR_NOT_BRANCHES, FAIL_ALERT)
+		return
+	}
+	runCommand("git checkout "+prevBranch, ERROR_CHANGE)
 }
