@@ -24,13 +24,14 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 	if backToPreviousBranch {
 		toPreviousBranch()
 	} else {
+		actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
+		saveActualBranch(actualName)
+
 		if hasArgument {
 			createANewBrach(branchName)
 		} else {
 			changeBranch()
 		}
-		actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
-		saveActualBranch(actualName)
 	}
 
 }
