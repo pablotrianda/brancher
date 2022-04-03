@@ -23,9 +23,9 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 
 	if backToPreviousBranch {
 		toPreviousBranch()
-		saveActualBranch()
 	} else {
-		saveActualBranch()
+		actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
+		saveActualBranch(actualName)
 		if hasArgument {
 			createANewBrach(branchName)
 		} else {
@@ -78,10 +78,9 @@ func changeBranch() {
 	runCommand("git checkout "+selectedBranch, ERROR_CHANGE)
 }
 
-func saveActualBranch() {
-	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
+func saveActualBranch(branchName string) {
 	repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
-	err := SaveBranch(getRepoName(), repoDir, actualName)
+	err := SaveBranch(getRepoName(), repoDir, branchName)
 	if err != nil {
 		showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
 	}
@@ -143,4 +142,6 @@ func toPreviousBranch() {
 		return
 	}
 	runCommand("git checkout "+prevBranch, ERROR_CHANGE)
+
+	saveActualBranch(prevBranch)
 }
