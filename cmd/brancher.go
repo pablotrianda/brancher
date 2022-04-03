@@ -138,11 +138,13 @@ func getSelectedBranch(branches []string) string {
 
 func toPreviousBranch() {
 	prevBranch, err := GetPreviousBranchName(getRepoName())
+	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
+
 	if err != nil {
 		showAlert(ERROR_NOT_BRANCHES, FAIL_ALERT)
 		return
 	}
 	runCommand("git checkout "+prevBranch, ERROR_CHANGE)
 
-	saveActualBranch(prevBranch)
+	saveActualBranch(actualName)
 }
