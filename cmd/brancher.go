@@ -15,7 +15,7 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 			showAlert(ERROR_CONFIG, FAIL_ALERT)
 			return
 		}
-		if err := createNewConfig(); err != nil {
+		if err := CreateNewConfig(); err != nil {
 			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
 			return
 		}
@@ -81,7 +81,7 @@ func changeBranch() {
 func saveActualBranch() {
 	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
 	repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
-	err := SaveBranch(actualName, getRepoName(), repoDir)
+	err := SaveBranch(getRepoName(), repoDir, actualName)
 	if err != nil {
 		showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
 	}
