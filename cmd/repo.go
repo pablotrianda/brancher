@@ -28,20 +28,12 @@ func InitDB() (*sql.DB, error) {
 	return db, nil
 }
 
-func SaveBranch(branchName string, repoName string, repoPwd string) error {
-	//db, _ := InitDB()
-
-	//repo, err := FindByRepoName(db, repoName)
-	//if err != nil {
-	//return err
-	//}
-
-	//if repo.PreviousBranch != "" {
-	//db.Model(&repo).Update("PreviousBranch", branchName)
-	//} else {
-	//db.Create(&Repo{Repo: repoName, Dir: repoPwd, PreviousBranch: branchName})
-	//}
-
+func SaveBranch(repoName string, repoDir string, previosBranch string) error {
+	repo := Repo{Repo: repoName, Dir: repoDir, PreviousBranch: previosBranch}
+	_, err := InsertOrUpdateRepo(repo)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

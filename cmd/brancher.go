@@ -81,7 +81,7 @@ func changeBranch() {
 func saveActualBranch() {
 	actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
 	repoDir := runCommand(GIT_GET_DIR, ERROR_SAVE_BRANCH)
-	err := SaveBranch(actualName, getRepoName(), repoDir)
+	err := SaveBranch(getRepoName(), repoDir, actualName)
 	if err != nil {
 		showAlert("BRANCHER: Cant save the info", FAIL_ALERT)
 	}
