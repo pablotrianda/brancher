@@ -113,3 +113,24 @@ func updateRepo(db *sql.DB, repo Repo) error {
 
 	return nil
 }
+
+func InitSchemaDB() error {
+	db, err := InitDB()
+	if err != nil {
+		return err
+	}
+	q := `CREATE TABLE IF NOT EXISTS "Repos" (
+			repo TEXT,
+			dir	 TEXT,
+			previosBranch TEXT
+		);`
+
+	_, err = db.Exec(q)
+	if err != nil {
+		return err
+	}
+
+	defer db.Close()
+
+	return nil
+}
