@@ -8,9 +8,10 @@
 </p>
 
 # Usage
-* Download the binary from releases section. 
+* Download the latest version from [releases section](https://github.com/pablotrianda/brancher/releases). 
 * Run `$ brancher` and select the brach to make the checkout in the menu or you can run `$ brancher branch_name` directly
 * Use the command `-n` to create a new branch
+* Use the command `.` to back to previous branch
 
 # Example
 ![Bancher](https://media0.giphy.com/media/d6zP9HA60tiG788xkX/giphy.gif?cid=790b7611cf30827b13c0d1d134eb43844f90b94637fa065a&rid=giphy.gif&ct=g)
@@ -26,8 +27,6 @@
 * Run `make build`
 
 # Next steps
-- [x] Show error in a friendly way.  
-- [x] Remember previous branch
 - [ ] Create a fix conflicted automated steps. [THIS](https://dev.to/smetankajakub/how-to-resolve-merge-conflicts-in-bitbucket-repository-with-git-bash-34ag)
 - [ ] Build a neovim plugin ;) 
 
