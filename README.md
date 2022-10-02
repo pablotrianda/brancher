@@ -1,12 +1,7 @@
 [![made-with-Go](https://img.shields.io/badge/Made%20with-Go-1f425f.svg)](http://golang.org)
 ![status](https://github.com/pablotrianda/brancher/actions/workflows/go.yml/badge.svg)
 
-# BRANCHER 🔍🌿!!.
-## Tool to manage git branches
-<p align="center">
-   <img src="https://i.imgur.com/vYqF0sz.png" data-canonical-src="https://i.imgur.com/vYqF0sz.png" width="200" height="250" />
-</p>
-
+# BRANCHER 🔍🌿!! - Tool to manage git branches
 # Usage
 * Download the latest version from [releases section](https://github.com/pablotrianda/brancher/releases). 
 * Run `$ brancher` and select the brach to make the checkout in the menu or you can run `$ brancher branch_name` directly
