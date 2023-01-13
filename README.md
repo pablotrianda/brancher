@@ -6,6 +6,7 @@
 * Download the latest version from [releases section](https://github.com/pablotrianda/brancher/releases). 
 * Run `$ brancher` and select the brach to make the checkout in the menu or you can run `$ brancher branch_name` directly
 * Use the command `-n` to create a new branch
+* Use the command `-D` to delelte a branch
 * Use the command `.` to back to previous branch
 
 # Example
