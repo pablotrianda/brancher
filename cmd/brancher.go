@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -9,7 +10,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
+func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool, branchNameDelete string) {
 	if _, err := findConfiguration(CONFIG_DIR); err != nil {
 		if conf := confirmCreateConfig(); !conf {
 			showAlert(ERROR_CONFIG, FAIL_ALERT)
@@ -19,6 +20,11 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool) {
 			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
 			return
 		}
+	}
+
+	if branchNameDelete != ""{
+		deleteBranch(branchNameDelete)
+		return
 	}
 
 	if backToPreviousBranch {
@@ -147,4 +153,17 @@ func toPreviousBranch() {
 	runCommand("git checkout "+prevBranch, ERROR_CHANGE)
 
 	saveActualBranch(actualName)
+}
+
+func deleteBranch(branchName string){
+	showAlert("Delete PERMANENTLY the selected branch? "+branchName, 1)
+	confirm := false
+	prompt := &survey.Confirm{
+		Message: "Do you DELETE the branch?",
+	}
+	survey.AskOne(prompt, &confirm)
+	if confirm {
+		runCommand("git branch -D "+branchName, ERROR_DELETE_BRANCH)
+		showAlert(branchName+" deleted successfully! ", 2)
+	}
 }
