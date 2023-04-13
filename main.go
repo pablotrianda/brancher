@@ -7,35 +7,35 @@ import (
 	"github.com/pablotrianda/brancher/cmd"
 )
 
+
 func main() {
 	cmd.Brancher(hasArgument())
 }
 
-func hasArgument() (bool, string, bool, string) {
-	hasArgument := false
-	nameNewBranch := ""
-	nameDeleteBranch := ""
-	backToPreviousBranch := false
+func hasArgument() cmd.Cli {
+	cli := cmd.Cli{}
+
+	cli.Fill_defaults()
 
 	newBranchArg := flag.String("n", "", "Name of a new branch")
 	deleteBranchArg := flag.String("D", "", "Name of branch to delete")
 	flag.Parse()
 
 	if *newBranchArg != "" {
-		hasArgument = true
-		nameNewBranch = *newBranchArg
-		return hasArgument, nameNewBranch, backToPreviousBranch, nameDeleteBranch
+		cli.HasArgument = true
+		cli.NameNewBranch = *newBranchArg
+		return cli
 	}
 
 	if *deleteBranchArg != "" {
-		hasArgument = true
-		nameDeleteBranch = *deleteBranchArg
-		return hasArgument, nameNewBranch, backToPreviousBranch, nameDeleteBranch
+		cli.HasArgument = true
+		cli.NameDeleteBranch = *deleteBranchArg
+		return cli
 	}
 
 	if len(os.Args) > 1 {
-		backToPreviousBranch = string(os.Args[1]) == "."
+		cli.BackToPreviousBranch = string(os.Args[1]) == "."
 	}
 
-	return hasArgument, nameNewBranch, backToPreviousBranch, nameDeleteBranch
+	return cli
 }

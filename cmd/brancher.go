@@ -9,7 +9,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool, branchNameDelete string) {
+func Brancher(cli Cli) {
 	if _, err := findConfiguration(CONFIG_DIR); err != nil {
 		if conf := confirmCreateConfig(); !conf {
 			showAlert(ERROR_CONFIG, FAIL_ALERT)
@@ -21,19 +21,19 @@ func Brancher(hasArgument bool, branchName string, backToPreviousBranch bool, br
 		}
 	}
 
-	if branchNameDelete != ""{
-		deleteBranch(branchNameDelete)
+	if cli.NameDeleteBranch != ""{
+		deleteBranch(cli.NameDeleteBranch)
 		return
 	}
 
-	if backToPreviousBranch {
+	if cli.BackToPreviousBranch {
 		toPreviousBranch()
 	} else {
 		actualName := runCommand(GIT_GET_NAME, ERROR_SAVE_BRANCH)
 		saveActualBranch(actualName)
 
-		if hasArgument {
-			createANewBrach(branchName)
+		if cli.HasArgument {
+			createANewBrach(cli.NameNewBranch)
 		} else {
 			changeBranch()
 		}
