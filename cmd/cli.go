@@ -5,6 +5,7 @@ type Cli struct{
 	NameNewBranch string
 	NameDeleteBranch string
 	BackToPreviousBranch bool
+	MakeStash bool
 }
 
 func (cli *Cli) Fill_defaults(){
@@ -12,4 +13,5 @@ func (cli *Cli) Fill_defaults(){
 	cli.NameNewBranch = ""
 	cli.NameDeleteBranch = ""
 	cli.BackToPreviousBranch = false
+	cli.MakeStash = false
 }
