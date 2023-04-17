@@ -51,3 +51,35 @@ func InitDatabaseFile() error {
 
 	return nil
 }
+
+// Validate current config show the alerts
+func validateCurrentConfiguration() bool{
+	if _, err := findConfiguration(CONFIG_DIR); err != nil {
+		if conf := confirmCreateConfig(); !conf {
+			showAlert(ERROR_CONFIG, FAIL_ALERT)
+			return false
+		}
+		if err := CreateNewConfig(); err != nil {
+			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
+			return false
+		}
+	}
+
+	return true
+}
+
+// Validate current config show the alerts
+func validateCurrentConfigurationAndAlert() bool{
+	if _, err := findConfiguration(CONFIG_DIR); err != nil {
+		if conf := confirmCreateConfig(); !conf {
+			showAlert(ERROR_CONFIG, FAIL_ALERT)
+			return false
+		}
+		if err := CreateNewConfig(); err != nil {
+			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
+			return false
+		}
+	}
+
+	return true
+}

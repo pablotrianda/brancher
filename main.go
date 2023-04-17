@@ -7,7 +7,6 @@ import (
 	"github.com/pablotrianda/brancher/cmd"
 )
 
-
 func main() {
 	cmd.Brancher(hasArgument())
 }
@@ -35,6 +34,12 @@ func hasArgument() cmd.Cli {
 
 	if len(os.Args) > 1 {
 		cli.BackToPreviousBranch = string(os.Args[1]) == "."
+		switch opt := string(os.Args[1]); opt {
+		case ".":
+			cli.BackToPreviousBranch = true
+		case "s":
+			cli.MakeStash = true
+		}
 	}
 
 	return cli
