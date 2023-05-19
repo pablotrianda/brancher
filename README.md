@@ -19,8 +19,8 @@
 * Install the dependencies `go mod tidy`
 * Run `go run *.go`
 
-# Extra - Build using golang with Docker
-* Run `make build`
+# Extra - Build using [dagger](https://dagger.io)
+* Run `go run build.go`
 
 # Next steps
 - [ ] Create a fix conflicted automated steps. [THIS](https://dev.to/smetankajakub/how-to-resolve-merge-conflicts-in-bitbucket-repository-with-git-bash-34ag)
