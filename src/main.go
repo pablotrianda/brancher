@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/pablotrianda/brancher/cmd"
+	"github.com/pablotrianda/brancher/src/cmd"
 )
 
 func main() {
