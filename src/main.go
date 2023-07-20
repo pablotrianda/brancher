@@ -14,7 +14,7 @@ func main() {
 func hasArgument() cmd.Cli {
 	cli := cmd.Cli{}
 
-	cli.Fill_defaults()
+	cli.FillDefaults()
 
 	newBranchArg := flag.String("n", "", "Name of a new branch")
 	deleteBranchArg := flag.String("D", "", "Name of branch to delete")

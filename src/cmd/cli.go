@@ -1,14 +1,14 @@
 package cmd
 
-type Cli struct{
-	HasArgument bool
-	NameNewBranch string
-	NameDeleteBranch string
+type Cli struct {
+	HasArgument          bool
+	NameNewBranch        string
+	NameDeleteBranch     string
 	BackToPreviousBranch bool
-	MakeStash bool
+	MakeStash            bool
 }
 
-func (cli *Cli) Fill_defaults(){
+func (cli *Cli) FillDefaults() {
 	cli.HasArgument = false
 	cli.NameNewBranch = ""
 	cli.NameDeleteBranch = ""
