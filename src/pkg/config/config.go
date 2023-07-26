@@ -1,8 +1,12 @@
-package cmd
+package config
 
 import (
 	"errors"
 	"os"
+
+	"github.com/pablotrianda/brancher/src/pkg/constans"
+	"github.com/pablotrianda/brancher/src/pkg/db"
+	"github.com/pablotrianda/brancher/src/pkg/prompt"
 )
 
 func findConfiguration(string) (confPath string, err error) {
@@ -10,7 +14,7 @@ func findConfiguration(string) (confPath string, err error) {
 	if err != nil {
 		return "", err
 	}
-	configDir := homeDir + CONFIG_DIR
+	configDir := homeDir + constans.CONFIG_DIR
 	if _, err := os.Stat(configDir); os.IsNotExist(err) {
 		return "", errors.New("Configuration not found")
 	}
@@ -23,7 +27,7 @@ func CreateNewConfig() error {
 		return err
 	}
 
-	configDir := homeDir + CONFIG_DIR
+	configDir := homeDir + constans.CONFIG_DIR
 	err = os.Mkdir(configDir, 0755)
 	if err != nil {
 		return err
@@ -40,10 +44,10 @@ func InitDatabaseFile() error {
 		return err
 	}
 
-	configDir := homeDir + CONFIG_DIR + DATABASE_NAME
+	configDir := homeDir + constans.CONFIG_DIR + constans.DATABASE_NAME
 
 	_, err = os.Create(configDir)
-	err = InitSchemaDB()
+	err = db.InitSchemaDB()
 
 	if err != nil {
 		return err
@@ -53,30 +57,14 @@ func InitDatabaseFile() error {
 }
 
 // Validate current config show the alerts
-func validateCurrentConfiguration() bool{
-	if _, err := findConfiguration(CONFIG_DIR); err != nil {
-		if conf := confirmCreateConfig(); !conf {
-			showAlert(ERROR_CONFIG, FAIL_ALERT)
+func ValidateCurrentConfigurationAndAlert() bool {
+	if _, err := findConfiguration(constans.CONFIG_DIR); err != nil {
+		if conf := prompt.ConfirmCreateConfig(); !conf {
+			prompt.ShowAlert(constans.ERROR_CONFIG, constans.FAIL_ALERT)
 			return false
 		}
 		if err := CreateNewConfig(); err != nil {
-			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
-			return false
-		}
-	}
-
-	return true
-}
-
-// Validate current config show the alerts
-func validateCurrentConfigurationAndAlert() bool{
-	if _, err := findConfiguration(CONFIG_DIR); err != nil {
-		if conf := confirmCreateConfig(); !conf {
-			showAlert(ERROR_CONFIG, FAIL_ALERT)
-			return false
-		}
-		if err := CreateNewConfig(); err != nil {
-			showAlert(ERROR_CRATE_CONFIG, FAIL_ALERT)
+			prompt.ShowAlert(constans.ERROR_CRATE_CONFIG, constans.FAIL_ALERT)
 			return false
 		}
 	}

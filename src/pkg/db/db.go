@@ -1,4 +1,4 @@
-package cmd
+package db
 
 import (
 	"database/sql"
@@ -6,6 +6,7 @@ import (
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/pablotrianda/brancher/src/pkg/constans"
 )
 
 type Repo struct {
@@ -16,8 +17,8 @@ type Repo struct {
 
 func InitDB() (*sql.DB, error) {
 	homeDir, err := os.UserHomeDir()
-	databaseDir := homeDir + CONFIG_DIR
-	databaseName := databaseDir + DATABASE_NAME
+	databaseDir := homeDir + constans.CONFIG_DIR
+	databaseName := databaseDir + constans.DATABASE_NAME
 
 	db, err := sql.Open("sqlite3", databaseName)
 
@@ -105,7 +106,13 @@ func insertNewRepo(db *sql.DB, repo Repo) error {
 }
 
 func updateRepo(db *sql.DB, repo Repo) error {
-	_, err := db.Exec("UPDATE Repos SET repo = ?, dir = ?, previosBranch = ? WHERE repo = ? ", repo.Repo, repo.Dir, repo.PreviousBranch, repo.Repo)
+	_, err := db.Exec(
+		"UPDATE Repos SET repo = ?, dir = ?, previosBranch = ? WHERE repo = ? ",
+		repo.Repo,
+		repo.Dir,
+		repo.PreviousBranch,
+		repo.Repo,
+	)
 
 	if err != nil {
 		return errors.New("Cant update the repo")
