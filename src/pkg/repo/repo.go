@@ -42,7 +42,8 @@ func CreateANewBrach(branchName string) {
 	}
 	survey.AskOne(p, &confirm)
 	if confirm {
-		ChangeToBranch(branchName)
+		createCommand := fmt.Sprintf("git checkout -b %s", branchName)
+		commandline.RunCommand(createCommand, constans.ERROR_CHANGE)
 	}
 }
 
