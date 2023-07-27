@@ -5,10 +5,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var createCmd = &cobra.Command{
-	Use:     "create",
+var newCmd = &cobra.Command{
+	Use:     "new",
 	Short:   "Create a new branch",
-	Aliases: []string{"D"},
+	Aliases: []string{"n"},
 	Long:    `This command will create a branch`,
 	Args:    cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -19,5 +19,5 @@ var createCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(createCmd)
+	rootCmd.AddCommand(newCmd)
 }
