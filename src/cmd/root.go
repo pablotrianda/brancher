@@ -15,11 +15,21 @@ var rootCmd = &cobra.Command{
                 Made by @pablotrianda
                 Complete documentation is available at http://github.com/pablotrianda/brancher`,
 	Run: func(cmd *cobra.Command, args []string) {
-		repo.ChangeBranch()
+		newBranchName, _ := cmd.Flags().GetString("name")
+
+		if newBranchName != "" {
+			create(newBranchName)
+		} else {
+			repo.ChangeBranch()
+		}
 	},
 }
 
 func Execute() {
+	var branchName string
+
+	rootCmd.Flags().StringVarP(&branchName, "name", "n", "", "Name of the branch")
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
