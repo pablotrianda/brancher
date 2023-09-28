@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pablotrianda/brancher/src/pkg/repo"
 	"github.com/spf13/cobra"
+
+	"github.com/pablotrianda/brancher/src/pkg/repo"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "brancher",
 	Short: "Tool manage local git branches",
-	Long: ` Toll to manage local git branches
+	Long: ` Tool to manage local git branches
                 Made by @pablotrianda
                 Complete documentation is available at http://github.com/pablotrianda/brancher`,
 	Run: func(cmd *cobra.Command, args []string) {
