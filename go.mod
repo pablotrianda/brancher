@@ -7,4 +7,5 @@ require (
 	github.com/AlecAivazis/survey/v2 v2.2.12
 	github.com/fatih/color v1.13.0
 	github.com/mattn/go-sqlite3 v1.14.12
+	github.com/spf13/cobra v1.7.0
 )

@@ -4,9 +4,10 @@
 # BRANCHER 🔍🌿!! - Tool to manage git branches
 # Usage
 * Download the latest version from [releases section](https://github.com/pablotrianda/brancher/releases). 
-* Run `$ brancher` and select the brach to make the checkout in the menu or you can run `$ brancher branch_name` directly
-* Use the command `-n` to create a new branch
-* Use the command `-D` to delelte a branch
+* Run `$ brancher` to show the branch list and select
+* Use the command `change` or `c` to change the branch
+* Use the flag `-n` to create a new branch
+* Use the command `delete` to delete a branch
 * Use the command `.` to back to previous branch
 
 # Example

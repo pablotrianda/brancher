@@ -1,4 +1,4 @@
-package cmd
+package constans
 
 // Commands
 const GITCOMMAND = "git for-each-ref --sort=committerdate refs/heads/ --format='%(refname:short),'"
@@ -16,6 +16,8 @@ const ERROR_CRATE_CONFIG = "Can't save the configuration"
 
 // Alert codes
 const FAIL_ALERT = 1
+const MAXIM_ALERT = 1
+const SUCCESS_ALERT = 2
 
 // Directory and Database
 const CONFIG_DIR = "/.config/brancher/"

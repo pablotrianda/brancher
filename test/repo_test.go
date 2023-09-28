@@ -3,8 +3,7 @@ package cmd
 import (
 	"testing"
 
-	"github.com/pablotrianda/brancher/cmd"
-	//"github.com/pablotrianda/brancher/cmd"
+	"github.com/pablotrianda/brancher/src/pkg/db"
 )
 
 func check(err error, t *testing.T) {
@@ -14,9 +13,9 @@ func check(err error, t *testing.T) {
 }
 
 func TestInsert(t *testing.T) {
-	newRepo := cmd.Repo{Repo: "a_new_one", Dir: "/home/user", PreviousBranch: "develop"}
+	newRepo := db.Repo{Repo: "a_new_one", Dir: "/home/user", PreviousBranch: "develop"}
 
-	repo, err := cmd.InsertOrUpdateRepo(newRepo)
+	repo, err := db.InsertOrUpdateRepo(newRepo)
 	if repo.Repo != "a_new_one" {
 		t.Fatal("Fail to create a new Repo")
 	}
@@ -25,8 +24,8 @@ func TestInsert(t *testing.T) {
 }
 
 func TestUpdate(t *testing.T) {
-	oldRepo := cmd.Repo{Repo: "a_new_one", Dir: "/home/user/code", PreviousBranch: "master"}
-	modifiedRepo, err := cmd.InsertOrUpdateRepo(oldRepo)
+	oldRepo := db.Repo{Repo: "a_new_one", Dir: "/home/user/code", PreviousBranch: "master"}
+	modifiedRepo, err := db.InsertOrUpdateRepo(oldRepo)
 	if modifiedRepo.Dir != "/home/user/code" {
 		t.Fatal("No updated the repo")
 	}
@@ -35,29 +34,29 @@ func TestUpdate(t *testing.T) {
 }
 
 func TestFindByRepoName(t *testing.T) {
-	db, err := cmd.InitDB()
+	currentDb, err := db.InitDB()
 	check(err, t)
 
-	repo, err := cmd.FindByRepoName(db, "a_new_one")
+	repo, err := db.FindByRepoName(currentDb, "a_new_one")
 	check(err, t)
 
 	if repo.Repo != "a_new_one" {
 		t.Fatal("The repo was not found")
 	}
 
-	defer db.Close()
+	defer currentDb.Close()
 }
 
 func TestGetPreviousBranchName(t *testing.T) {
-	db, err := cmd.InitDB()
+	currentDb, err := db.InitDB()
 	check(err, t)
 
-	prevBranch, err := cmd.GetPreviousBranchName("a_new_one")
+	prevBranch, err := db.GetPreviousBranchName("a_new_one")
 	check(err, t)
 
 	if prevBranch != "master" {
 		t.Fatalf("Fail, want: master, got %s", prevBranch)
 	}
 
-	defer db.Close()
+	defer currentDb.Close()
 }
