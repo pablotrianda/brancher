@@ -31,9 +31,9 @@ func Execute() {
 
 	rootCmd.Flags().StringVarP(&branchName, "name", "n", "", "Name of the branch")
 
-	cmd, err, _ := rootCmd.Find(os.Args[1:])
+	_, _, err := rootCmd.Find(os.Args[1:])
 	// default cmd if no cmd is given
-	if err == nil && cmd.Use == rootCmd.Use {
+	if err != nil {
 		args := append([]string{changeCmd.Use}, os.Args[1:]...)
 		rootCmd.SetArgs(args)
 	}
