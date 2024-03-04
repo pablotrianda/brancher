@@ -100,3 +100,7 @@ func getBranches(commandOutput string) []string {
 	}
 	return branches
 }
+
+func FetchBranches(){
+	commandline.RunCommand("git fetch --all", constans.ERROR_CHANGE)
+}

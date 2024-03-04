@@ -13,6 +13,7 @@ const ERROR_SAVE_BRANCH = "Can't get the branch actual name "
 const ERROR_DELETE_BRANCH = "Can't delete the branch "
 const ERROR_CONFIG = "Can't save the configuration"
 const ERROR_CRATE_CONFIG = "Can't save the configuration"
+const ERROR_FETCH_BRANCHES = "Error when tried to fetch all branches from remote"
 
 // Alert codes
 const FAIL_ALERT = 1
