@@ -9,6 +9,7 @@
 * Use the flag `-n` to create a new branch
 * Use the command `delete` to delete a branch
 * Use the command `.` to back to previous branch
+* Use the command `f` to pull al branches from the remote origin
 
 # Example
 ![Bancher](https://media0.giphy.com/media/d6zP9HA60tiG788xkX/giphy.gif?cid=790b7611cf30827b13c0d1d134eb43844f90b94637fa065a&rid=giphy.gif&ct=g)
